@@ -1,0 +1,45 @@
+<?php
+
+class Estudiante {
+    // Atributos
+    public $nombre;
+    public $edad;
+    public $calificaciones = []; // Inicializado como un array vacío
+
+    // Constructor
+    public function __construct($nombre, $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+
+    // Método para añadir una nueva nota al array
+    public function agregar_calificacion($nota) {
+        $this->calificaciones[] = $nota;
+        echo "Nota $nota agregada a {$this->nombre}.\n";
+    }
+
+    // Método para calcular el promedio
+    public function calcular_promedio() {
+        if (count($this->calificaciones) > 0) {
+            $suma = array_sum($this->calificaciones);
+            $total = count($this->calificaciones);
+            return $suma / $total;
+        } else {
+            return 0; // Evita la división por cero si no hay notas
+        }
+    }
+}
+
+// --- Ejemplo de uso ---
+
+$estudiante1 = new Estudiante("Luis García", 20);
+
+$estudiante1->agregar_calificacion(18);
+$estudiante1->agregar_calificacion(15);
+$estudiante1->agregar_calificacion(20);
+
+echo "Estudiante: " . $estudiante1->nombre . "\n";
+echo "Edad: " . $estudiante1->edad . "\n";
+echo "Promedio final: " . number_format($estudiante1->calcular_promedio(), 2) . "\n";
+
+?>
