@@ -1,0 +1,42 @@
+<?php
+
+class Libro {
+    // Atributos
+    public $titulo;
+    public $autor;
+    public $numero_paginas;
+
+    // Constructor para inicializar los datos
+    public function __construct($titulo, $autor, $numero_paginas) {
+        $this->titulo = $titulo;
+        $this->autor = $autor;
+        $this->numero_paginas = $numero_paginas;
+    }
+
+    // Método para imprimir la descripción requerida
+    public function mostrar_info() {
+        echo "El libro '{$this->titulo}' por '{$this->autor}' tiene {$this->numero_paginas} páginas. \n";
+    }
+
+    // Método para validar si el libro es extenso
+    public function es_largo() {
+        return $this->numero_paginas > 500;
+    }
+}
+
+// --- Pruebas con diferentes libros ---
+
+// Ejemplo 1: Un libro técnico (No es largo)
+$libro1 = new Libro("Clean Code", "Robert C. Martin", 464);
+
+// Ejemplo 2: Un libro clásico (Es largo)
+$libro2 = new Libro("Drácula", "Bram Stoker", 518);
+
+// Ejecución de métodos
+$libro1->mostrar_info();
+echo "¿Es un libro largo?: " . ($libro1->es_largo() ? "Sí" : "No") . "\n\n";
+
+$libro2->mostrar_info();
+echo "¿Es un libro largo?: " . ($libro2->es_largo() ? "Sí" : "No") . "\n";
+
+?>
