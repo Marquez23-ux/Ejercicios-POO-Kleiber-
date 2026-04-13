@@ -1,0 +1,33 @@
+<?php
+
+class Rectangulo {
+    // Atributos
+    private $ancho;
+    private $alto;
+
+    // Constructor para inicializar las dimensiones
+    public function __construct($ancho, $alto) {
+        $this->ancho = $ancho;
+        $this->alto = $alto;
+    }
+
+    // Método para calcular el área: base * altura
+    public function calcular_area() {
+        return $this->ancho * $this->alto;
+    }
+
+    // Método para calcular el perímetro: 2 * (base + altura)
+    public function calcular_perimetro() {
+        return 2 * ($this->ancho + $this->alto);
+    }
+}
+
+// --- Ejemplo de uso ---
+
+$miRectangulo = new Rectangulo(10.5, 5.0);
+
+echo "Dimensiones: " . 10.5 . " x " . 5.0 . "\n";
+echo "Área: " . $miRectangulo->calcular_area() . "\n";
+echo "Perímetro: " . $miRectangulo->calcular_perimetro() . "\n";
+
+?>
