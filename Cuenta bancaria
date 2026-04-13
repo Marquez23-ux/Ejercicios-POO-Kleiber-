@@ -1,0 +1,49 @@
+<?php
+
+class CuentaBancaria {
+    // Atributos
+    public $titular;
+    private $saldo;
+
+    // Constructor para inicializar la cuenta
+    public function __construct($titular, $saldoInicial = 0) {
+        $this->titular = $titular;
+        $this->saldo = $saldoInicial;
+    }
+
+    // Método para sumar monto al saldo
+    public function depositar($cantidad) {
+        if ($cantidad > 0) {
+            $this->saldo += $cantidad;
+            echo "Depósito exitoso. Se han sumado: $cantidad \n";
+        }
+    }
+
+    // Método para restar monto con validación de fondos
+    public function retirar($cantidad) {
+        if ($cantidad <= $this->saldo) {
+            $this->saldo -= $cantidad;
+            echo "Retiro exitoso. Se han retirado: $cantidad \n";
+        } else {
+            echo "Error: Fondos insuficientes para retirar $cantidad. \n";
+        }
+    }
+
+    // Método para devolver el saldo actual
+    public function consultar_saldo() {
+        return $this->saldo;
+    }
+}
+
+// --- Ejemplo de uso ---
+
+$miCuenta = new CuentaBancaria("Juan Pérez", 100.0);
+
+echo "Titular: " . $miCuenta->titular . "\n";
+echo "Saldo inicial: " . $miCuenta->consultar_saldo() . "\n";
+
+$miCuenta->depositar(50.5);
+$miCuenta->retirar(30.0);
+$miCuenta->retirar(200.0); // Esto debería fallar
+
+echo "Saldo final: " . $miCuenta->consultar_saldo() . "\n";
