@@ -1,0 +1,62 @@
+<?php
+
+class Coche {
+    // Atributos
+    public $marca;
+    public $modelo;
+    public $velocidad_actual = 0;
+    public $esta_encendido = false;
+
+    // Constructor
+    public function __construct($marca, $modelo) {
+        $this->marca = $marca;
+        $this->modelo = $modelo;
+    }
+
+    // Método para encender el coche
+    public function encender() {
+        $this->esta_encendido = true;
+        echo "El coche {$this->marca} {$this->modelo} ha sido encendido.\n";
+    }
+
+    // Método para apagar y resetear velocidad
+    public function apagar() {
+        $this->esta_encendido = false;
+        $this->velocidad_actual = 0;
+        echo "Coche apagado y velocidad reseteada a 0.\n";
+    }
+
+    // Acelerar con validación de estado
+    public function acelerar($velocidad) {
+        if ($this->esta_encendido) {
+            $this->velocidad_actual += $velocidad;
+            echo "Acelerando... Velocidad actual: {$this->velocidad_actual} km/h.\n";
+        } else {
+            echo "Error: No puedes acelerar, el coche está apagado.\n";
+        }
+    }
+
+    // Frenar con validación de límite inferior (0)
+    public function frenar($velocidad) {
+        $this->velocidad_actual -= $velocidad;
+        
+        if ($this->velocidad_actual < 0) {
+            $this->velocidad_actual = 0;
+        }
+        
+        echo "Frenando... Velocidad actual: {$this->velocidad_actual} km/h.\n";
+    }
+}
+
+// --- Ejemplo de uso ---
+
+$miCoche = new Coche("Toyota", "Corolla");
+
+$miCoche->acelerar(20); // Debería fallar (está apagado)
+$miCoche->encender();
+$miCoche->acelerar(50);
+$miCoche->frenar(20);
+$miCoche->frenar(100); // No bajará de 0
+$miCoche->apagar();
+
+?>
