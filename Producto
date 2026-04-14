@@ -1,0 +1,50 @@
+<?php
+
+class Producto {
+    // Atributos
+    public $nombre;
+    public $precio;
+    public $stock;
+
+    // Constructor
+    public function __construct($nombre, $precio, $stock) {
+        $this->nombre = $nombre;
+        $this->precio = $precio;
+        $this->stock = $stock;
+    }
+
+    // Método para disminuir stock con validación
+    public function vender($cantidad) {
+        if ($cantidad <= $this->stock) {
+            $this->stock -= $cantidad;
+            echo "Venta realizada: $cantidad unidades de '{$this->nombre}'.\n";
+        } else {
+            echo "Error: Stock insuficiente de '{$this->nombre}'. Solo quedan {$this->stock} unidades.\n";
+        }
+    }
+
+    // Método para aumentar el stock
+    public function reponer($cantidad) {
+        $this->stock += $cantidad;
+        echo "Reposición exitosa: Se agregaron $cantidad unidades de '{$this->nombre}'.\n";
+    }
+
+    // Método para devolver la información del producto
+    public function obtener_info() {
+        return "Producto: {$this->nombre} | Precio: $" . number_format($this->precio, 2) . " | Stock actual: {$this->stock} unidades.";
+    }
+}
+
+// --- Ejemplo de uso ---
+
+$miProducto = new Producto("Audífonos Gamer", 55.99, 10);
+
+echo $miProducto->obtener_info() . "\n";
+
+$miProducto->vender(3); // Venta exitosa
+$miProducto->reponer(5); // Ahora hay 12
+$miProducto->vender(20); // Debería dar error
+
+echo $miProducto->obtener_info() . "\n";
+
+?>
